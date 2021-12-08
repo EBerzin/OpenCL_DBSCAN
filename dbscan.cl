@@ -82,14 +82,16 @@ __kernel void label_local(__global uint* restrict neighbCount,
                     // __local uint*  restrict added_to_stack_copy,
                     // __local uint*  restrict visited_copy,
                      uint label_num, uint N, uint min_samps) {
+
+	int counter_local = *counter;
 		     
-	for(uint i = 0; i < *counter; i++) {
+	for(uint i = 0; i < counter_local; i++) {
                       stack_copy[i] = stack[i];
                  neighbCount_copy[i] = neighbCount[stack_copy[i]];
         }
 
         uint total_added = 0;
-        for(uint i = 0; i < *counter; i++) {
+        for(uint i = 0; i < counter_local; i++) {
                  uint j = stack_copy[i];
                  for(uint idx = 0; idx < neighbCount_copy[i]; idx++) {
                         neighbIdx_copy[idx] = neighbIdx[j*N + idx];
