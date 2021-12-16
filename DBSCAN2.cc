@@ -67,28 +67,28 @@ int main(int argc, char *argv[]) {
 
 
     //Reading in true labels to compare to python
-    float **true_labels = new float*[999];
-    for(int i = 0; i < 999; i++) {
-      true_labels[i] = new float[50000];
-    }
+    //float **true_labels = new float*[999];
+    //for(int i = 0; i < 999; i++) {
+    //true_labels[i] = new float[50000];
+    //}
 
-    string inFileName_true = "../ClusterData/scikitLabels.txt";
-    ifstream inFile_true;
-    inFile_true.open(inFileName_true.c_str());
-    if (inFile_true.is_open()) {
-      for (int i = 0; i < 999; i++){
-        for (int j = 0; j < 50000; j++) {
-          inFile_true >> true_labels[i][j];
-          //cout << true_labels[i][j] << " ";
-        }
-      }
-      inFile_true.close(); // CLose input file
-    }
-    else { //Error message
-        cerr << "Can't find input file " << inFileName_true << endl;
-    }
+    //string inFileName_true = "ClusterData/scikitLabels.txt";
+    //ifstream inFile_true;
+    //inFile_true.open(inFileName_true.c_str());
+    //if (inFile_true.is_open()) {
+    //for (int i = 0; i < 999; i++){
+    //  for (int j = 0; j < 50000; j++) {
+    //    inFile_true >> true_labels[i][j];
+    //    //cout << true_labels[i][j] << " ";
+      //  }
+    //  }
+    //  inFile_true.close(); // CLose input file
+    // }
+    // else { //Error message
+  //  cerr << "Can't find input file " << inFileName_true << endl;
+    // }
 
-    cout << "READ TRUTH" << endl;
+    // cout << "READ TRUTH" << endl;
 
 
     vector<float> total_times;
@@ -166,12 +166,12 @@ int main(int argc, char *argv[]) {
 
             // If point is a core point, labels it and it's neighbors as part of a cluster
             // and add them to the neighbors queue
-            cout << "Neighbors: "  << nNeighb << endl;
+            //cout << "Neighbors: "  << nNeighb << endl;
             if (nNeighb >= min_samps) {
               entered_loop = 1;
               labels[i] = label_num;
               for (int k = 0; k < nNeighb; k++) {
-                cout << "entered_loop" << endl;
+		//  cout << "entered_loop" << endl;
                 // Only add to queue if points have not previously been added
                 if (added_to_queue[found_neighbors[k]] == 0) {
                   added_to_queue[found_neighbors[k]] = 1;
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
             }
             delete[] found_neighbors;
 
-            cout << "Counter " << counter << endl;
+	    // cout << "Counter " << counter << endl;
           }
           if (counter == 0) { break;}
           // This is where we launch may parallel processes, each of which return the indices of neighboring clusters
@@ -205,19 +205,19 @@ int main(int argc, char *argv[]) {
       chrono::time_point<std::chrono::high_resolution_clock> stop = chrono::high_resolution_clock::now();
 
         //Comparison to true values
-       int match = 1;
-       int count_zeros = 0;
-       for (int j = 0; j < nsamples; j++){
+      // int match = 1;
+      //int count_zeros = 0;
+      // for (int j = 0; j < nsamples; j++){
          //cout << labels[j] << endl;
-          if (true_labels[c-2][j] != labels[j]) {
-            match = 0;
-            cout << j << " " << true_labels[c-2][j] << " " << labels[j] << " " << neighbors[j] << endl;
-          }
-        }
+      //  if (true_labels[c-2][j] != labels[j]) {
+      //    match = 0;
+      //    cout << j << " " << true_labels[c-2][j] << " " << labels[j] << " " << neighbors[j] << endl;
+      //  }
+      //  }
 
-        cout << "TOTAL ZEROS: " << count_zeros << endl;
+       //cout << "TOTAL ZEROS: " << count_zeros << endl;
 
-       cout << "MATCH: " << match << endl;
+      //  cout << "MATCH: " << match << endl;
 
 
        auto duration = chrono::duration_cast<chrono::milliseconds>(stop - start);
@@ -230,7 +230,7 @@ int main(int argc, char *argv[]) {
        set<int> n_clusters(labels, labels + nsamples);
        cout << n_clusters.size() << std::endl;
 
-       total_times.push_back(duration.count());
+       //total_times.push_back(duration.count());
 
      }
 

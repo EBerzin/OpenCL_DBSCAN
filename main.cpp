@@ -76,28 +76,28 @@ int main(void) {
 
 
   //Reading in data for comparison
-  float **true_labels = new float*[999];
-  for(int i = 0; i < 999; i++) {
-    true_labels[i] = new float[50000];
-  }
+  //  float **true_labels = new float*[999];
+  //for(int i = 0; i < 999; i++) {
+  //true_labels[i] = new float[50000];
+  //}
 
-  string inFileName_true = "ClusterData/scikitLabels.txt";
-  ifstream inFile_true;
-  inFile_true.open(inFileName_true.c_str());
-  if (inFile_true.is_open()) {
-    for (int i = 0; i < 999; i++){
-      for (int j = 0; j < 50000; j++) {
-  	inFile_true >> true_labels[i][j];
+  // string inFileName_true = "ClusterData/scikitLabels.txt";
+  // ifstream inFile_true;
+  // inFile_true.open(inFileName_true.c_str());
+  // if (inFile_true.is_open()) {
+  //for (int i = 0; i < 999; i++){
+  //  for (int j = 0; j < 50000; j++) {
+  //	inFile_true >> true_labels[i][j];
 	//cout << true_labels[i][j] << " ";
-      }
-    }
-    inFile_true.close(); // CLose input file
-  }
-  else { //Error message
-    cerr << "Can't find input file " << inFileName_true << endl;
-  }
+  //  }
+  //  }
+  //inFile_true.close(); // CLose input file
+  // }
+  //else { //Error message
+  //cerr << "Can't find input file " << inFileName_true << endl;
+  //}
 
-  cout << "READ TRUTH" << endl;
+  // cout << "READ TRUTH" << endl;
 
 
 
@@ -269,7 +269,7 @@ int main(void) {
 
     chrono::time_point<std::chrono::high_resolution_clock> stop = chrono::high_resolution_clock::now();                                                                     
     auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);  
-    cout << "TIME! " << duration.count() << endl;
+    //cout << "TIME! " << duration.count() << endl;
 
 
     //Reading final values
@@ -279,15 +279,15 @@ int main(void) {
     checkErr(err, "Finish Queue");
 
     //Comparison to truth values
-    int match = 1;
-    for (int j = 0; j < vectorSize; j++){
+    //  int match = 1;
+    // for (int j = 0; j < vectorSize; j++){
       //   //cout << true_labels[c-2][j] << " ";
-      if (true_labels[c-2][j] != labels[j]) {
-	match = 0;
-	cout << j << " " << true_labels[c-2][j] << " " << labels[j] << " " <<  neighbCount[j] << endl;
-      }
-    }    
-    cout << "MATCH: " << match << endl;
+    //  if (true_labels[c-2][j] != labels[j]) {
+    //	match = 0;
+    //	cout << j << " " << true_labels[c-2][j] << " " << labels[j] << " " <<  neighbCount[j] << endl;
+    //  }
+    // }    
+    // cout << "MATCH: " << match << endl;
 
   }
 
